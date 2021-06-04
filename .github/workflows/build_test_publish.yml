@@ -72,7 +72,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: bookstore-${{ matrix.os }}-${{ matrix.java }}.war
-          path: target/bookstore-*.war
+          path: target/bookstore.war
 
 
 
