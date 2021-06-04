@@ -22,7 +22,6 @@ jobs:
       build_version: ${{ steps.maven_build.outputs.version }}
       container_name: ${{ steps.build_params.outputs.container_name }}
       container_owner: ${{ steps.build_params.outputs.container_owner }}
-      container_registry: ghcr.io
 
     steps:
       - name: Checkout
@@ -113,8 +112,8 @@ jobs:
       - name: GitHub Container Registry Login
         uses: docker/login-action@v1
         with:
-          registry: ${{ needs.build.outputs.container_registry }}
-          username: octodemobo
+          registry: ghcr.io
+          username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Docker buildx
@@ -141,7 +140,7 @@ jobs:
             REPOSITORY_NAME=${{ github.repository }}
             revision=${{ github.sha }}
           push: true
-          tags: ${{ needs.build.outputs.container_registry }}/${{ needs.build.outputs.container_owner }}/${{ steps.define_container_attributes.outputs.container_name_and_version_tag }}
+          tags: ghcr.io/${{ needs.build.outputs.container_owner }}/${{ steps.define_container_attributes.outputs.container_name_and_version_tag }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 
