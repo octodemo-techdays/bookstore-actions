@@ -71,8 +71,8 @@ jobs:
       - name: Save artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: standalone-${{ matrix.os }}-${{ matrix.java }}.jar
-          path: target/bookstore-*.jar
+          name: bookstore-${{ matrix.os }}-${{ matrix.java }}.war
+          path: target/bookstore-*.war
 
 
 
@@ -100,7 +100,7 @@ jobs:
       - name: Get Jar file artifact
         uses: actions/download-artifact@v2
         with:
-          name: standalone-ubuntu-20.04-11.jar
+          name: bookstore-ubuntu-20.04-11.war
           path: target
 
       - name: Create container image name
