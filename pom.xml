@@ -3,19 +3,29 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.octodemo-db</groupId>
-    <artifactId>bookstore</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <artifactId>bookstore-actions</artifactId>
+    <version>${revision}${changelist}${sha1}</version>
     <packaging>war</packaging>
 
     <name>${project.artifactId}</name>
     <description>A Java example project to demonstrate a Java development stack with Maven, GitHub Actions, GitHub Package Registry and Cloud Resources.</description>
-    <url>https://github.com/octodemo-db/bookstore</url>
+    <url>https://github.com/octodemo-techdays/bookstore-actions</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <java.version>11</java.version>
+
+        <!--
+            Properties used to create a CD style version number for the Maven build
+        -->
+        <!-- SemVer for the primary version number that the code represents -->
+        <revision>1.0.0</revision>
+        <!-- A change list suffix for the version number indicating branch/source of the code -->
+        <changelist></changelist>
+        <!-- Make all builds integration build by default, leaving releases to be defined via parameters -->
+        <sha1>-SNAPSHOT</sha1>
 
         <!--
             Dependency Versions
