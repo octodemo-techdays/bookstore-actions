@@ -2,6 +2,7 @@ name: Build - Test - Publish
 
 on:
   push:
+  pull_request:
 
 jobs:
   build:
@@ -47,6 +48,7 @@ jobs:
             mvn-${{ matrix.java }}-${{ runner.os }}
             mvn-${{ matrix.java }}
             mvn-
+
       - name: Define Build Parameters
         id: build_params
         uses: actions/github-script@v4.0.2
@@ -56,6 +58,7 @@ jobs:
               , buildParameters = require(scriptPath);
             ;
             buildParameters(context, core).injectBuildParameters();
+
       - name: Maven Build Test and Package
         id: maven_build
         run: |
@@ -126,6 +129,7 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
+
       - name: Build and Push Container
         id: container_publish
         uses: docker/build-push-action@v2
@@ -147,6 +151,7 @@ jobs:
         run: |
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
       - name: Publish Container as a Status
         id: container_image_status
         uses: Sibz/github-status-action@v1.1.5
