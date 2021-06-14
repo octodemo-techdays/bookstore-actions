@@ -79,6 +79,10 @@ jobs:
   build_container:
     name: Build Container
     runs-on: ubuntu-20.04
+    
+    # Do not run this on dependabot triggered activities as it cannot read the Actions Secrets.
+    if: ${{ !(contains(github.actor, 'dependabot[bot]')) }}
+    
     needs:
       - build
 
